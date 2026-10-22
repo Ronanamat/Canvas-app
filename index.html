@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071426" />
+  <title>Atelier — Digital Canvas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#">
+        <span class="brand-icon">✳</span>
+        <span>atelier<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="topbar-center">
+        <span class="status-dot"></span>
+        <span>YOUR CREATIVE SPACE</span>
+      </div>
+
+      <button class="download-btn" id="downloadBtn">
+        <span>↓</span> Export artwork
+      </button>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar">
+        <div class="section-heading">
+          <span class="eyebrow">STUDIO TOOLS</span>
+          <span class="small-line"></span>
+        </div>
+
+        <div class="tool-grid">
+          <button class="tool-btn active" data-tool="brush" title="Brush">
+            <span class="tool-icon">✎</span>
+            <span>Brush</span>
+          </button>
+          <button class="tool-btn" data-tool="eraser" title="Eraser">
+            <span class="tool-icon">◩</span>
+            <span>Eraser</span>
+          </button>
+        </div>
+
+        <div class="panel-divider"></div>
+
+        <section class="control-section">
+          <div class="control-heading">
+            <label for="colorPicker">Brush color</label>
+            <span class="control-caption">CUSTOM</span>
+          </div>
+
+          <div class="color-card">
+            <input type="color" id="colorPicker" value="#a5b4fc" aria-label="Choose brush color" />
+            <div class="color-info">
+              <span class="color-name">Ink color</span>
+              <span id="hexValue">#A5B4FC</span>
+            </div>
+          </div>
+
+          <div class="swatches" aria-label="Preset colors">
+            <button class="swatch selected" data-color="#a5b4fc" style="--swatch:#a5b4fc" aria-label="Lavender"></button>
+            <button class="swatch" data-color="#f0abfc" style="--swatch:#f0abfc" aria-label="Pink"></button>
+            <button class="swatch" data-color="#67e8f9" style="--swatch:#67e8f9" aria-label="Cyan"></button>
+            <button class="swatch" data-color="#86efac" style="--swatch:#86efac" aria-label="Mint"></button>
+            <button class="swatch" data-color="#fcd34d" style="--swatch:#fcd34d" aria-label="Gold"></button>
+            <button class="swatch" data-color="#ffffff" style="--swatch:#ffffff" aria-label="White"></button>
+          </div>
+        </section>
+
+        <div class="panel-divider"></div>
+
+        <section class="control-section">
+          <div class="control-heading">
+            <label for="brushSize">Brush size</label>
+            <span class="size-value" id="sizeValue">8 px</span>
+          </div>
+
+          <input type="range" id="brushSize" min="1" max="50" value="8" />
+
+          <div class="range-labels">
+            <span>Fine</span>
+            <span>Bold</span>
+          </div>
+
+          <div class="brush-presets">
+            <button class="size-preset" data-size="3">
+              <span class="size-dot dot-small"></span>
+              <span>Fine</span>
+            </button>
+            <button class="size-preset selected" data-size="8">
+              <span class="size-dot dot-medium"></span>
+              <span>Medium</span>
+            </button>
+            <button class="size-preset" data-size="20">
+              <span class="size-dot dot-large"></span>
+              <span>Bold</span>
+            </button>
+          </div>
+        </section>
+
+        <div class="panel-divider"></div>
+
+        <section class="control-section">
+          <div class="control-heading">
+            <label for="opacity">Opacity</label>
+            <span class="size-value" id="opacityValue">100%</span>
+          </div>
+          <input type="range" id="opacity" min="10" max="100" value="100" />
+        </section>
+
+        <div class="sidebar-bottom">
+          <div class="tip-card">
+            <span class="tip-icon">✧</span>
+            <div>
+              <strong>Make something lovely.</strong>
+              <p>Every masterpiece starts with a single stroke.</p>
+            </div>
+          </div>
+
+          <button class="clear-btn" id="clearBtn">
+            <span>⌫</span> Clear canvas
+          </button>
+        </div>
+      </aside>
+
+      <section class="canvas-area">
+        <div class="canvas-header">
+          <div>
+            <span class="eyebrow">UNTITLED PROJECT</span>
+            <h1>Your canvas<span class="heading-period">.</span></h1>
+            <p>A little space for big ideas.</p>
+          </div>
+
+          <div class="canvas-actions">
+            <button class="icon-btn" id="undoBtn" title="Undo last stroke" aria-label="Undo">↶</button>
+            <button class="icon-btn" id="redoBtn" title="Redo stroke" aria-label="Redo">↷</button>
+          </div>
+        </div>
+
+        <div class="canvas-frame">
+          <div class="canvas-topline">
+            <span><span class="live-dot"></span> LIVE CANVAS</span>
+            <span id="canvasDimensions">READY TO CREATE</span>
+          </div>
+
+          <div class="canvas-container" id="canvasContainer">
+            <canvas id="drawingCanvas" aria-label="Drawing canvas"></canvas>
+            <div class="empty-state" id="emptyState">
+              <span class="empty-star">✳</span>
+              <h2>Begin anywhere.</h2>
+              <p>Let your imagination find its way.</p>
+              <span class="empty-hint">DRAW SOMETHING BEAUTIFUL</span>
+            </div>
+          </div>
+
+          <div class="canvas-footer">
+            <span><kbd>Click</kbd> and drag to draw</span>
+            <span class="footer-right">MADE FOR YOUR IMAGINATION ✦</span>
+          </div>
+        </div>
+
+        <footer class="workspace-footer">
+          <span>ATELIER STUDIO <span class="footer-separator">/</span> CREATIVE TOOLS</span>
+          <span>TAKE YOUR TIME. CREATE YOUR WAY.</span>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
